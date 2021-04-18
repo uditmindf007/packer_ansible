@@ -1,0 +1,10 @@
+- name: Install git, nginx, python, django, supervisor
+  hosts: all
+  roles:
+    - git
+    - nginx
+    - python
+    - django
+    - supervisor
+  environment:
+    HOST: "*"

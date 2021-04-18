@@ -1,0 +1,10 @@
+user: ubuntu
+
+apt_cache_seconds: 3600
+
+project_name: packer_ansible
+
+gunicorn_port: 8000
+repo_name: ""
+
+code_directory: "/code/{{ project_name }}"

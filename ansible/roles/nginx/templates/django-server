@@ -1,0 +1,20 @@
+server {
+	server_name <remote IP>;
+
+	location /static/ {
+		root /home/ubuntu/code/packer_ansible/;
+	}
+
+	location /media/ {
+                root /home/ubuntu/code/packer_ansible/;
+        }
+
+    	location / {
+		include proxy_params;
+		proxy_pass http://127.0.0.1:8000;
+        }
+
+	listen 80;
+	client_max_body_size 200M;
+
+}

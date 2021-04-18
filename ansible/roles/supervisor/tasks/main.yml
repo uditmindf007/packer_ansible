@@ -1,0 +1,13 @@
+- name: install supervisor
+  become: true
+  apt: cache_valid_time={{ apt_cache_seconds }}
+    name=supervisor
+    state=latest
+    update_cache=yes
+
+- name: add supervisor configuration file for gunicorn
+  become: true
+  template: src=supervisor-gunicorn.conf
+            dest=/etc/supervisor/conf.d/gunicorn.conf
+  notify:
+    - restart supervisor

@@ -1,0 +1,14 @@
+- name: clone project
+  become: true
+  git:
+    repo: https://github.com/uditmindf007/packer_ansible.git
+    dest: "{{ code_directory }}"
+
+- name: install packages from pip
+  shell: pip3 install --upgrade pip && pip3 install -r {{ code_directory }}/requirements/requirements.txt
+
+- name: copy bash script to deploy server
+  become: true
+  copy:
+    src: "./deploy_server.sh"
+    dest: "{{ code_directory }}/deploy_server.sh"

@@ -1,0 +1,43 @@
+{
+  "variables": {
+    "access_key": "{{ env `AWS_ACCESS_KEY_ID` }}",
+    "secret_key": "{{ env `AWS_SECRET_ACCESS_KEY` }}",
+    "region": "{{ env `AWS_REGION` }}",
+    "source_ami": "ami-0a4a70bd98c6d6441",
+    "instance_type": "t2.micro"
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "access_key": "{{ user `access_key` }}",
+      "secret_key": "{{ user `secret_key` }}",
+      "region": "{{ user `region` }}",
+      "source_ami": "{{ user `source_ami` }}",
+      "instance_type": "{{ user `instance_type` }}",
+      "ssh_username": "ubuntu",
+      "ami_name": "packer {{timestamp}}"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "script": "scripts/ansible.sh"
+    },
+    {
+      "type": "ansible-local",
+      "playbook_file": "../ansible/site.yml",
+      "role_paths": [
+        "../ansible/roles/git",
+        "../ansible/roles/nginx",
+        "../ansible/roles/python",
+        "../ansible/roles/django",
+        "../ansible/roles/supervisor"
+      ],
+      "group_vars": "../ansible/group_vars"
+    },
+    {
+      "type": "shell",
+      "script": "scripts/cleanup.sh"
+    }
+  ]
+}

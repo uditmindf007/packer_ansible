@@ -1,0 +1,4 @@
+---
+- name: install git
+  become: true
+  apt: name=git state=present
