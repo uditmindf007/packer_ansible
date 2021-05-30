@@ -25,7 +25,7 @@ SECRET_KEY = 'pm%61$bmug^#w8q(z2z(($)nz&3u(c2ak-q!!o-b^nin!2h2a*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
